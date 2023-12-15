@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import me.saniukvyacheslav.core.reporting.service.ConsoleReportingService;
 import me.saniukvyacheslav.core.reporting.service.ReportingService;
+import me.saniukvyacheslav.core.reporting.service.configuration.ReportingServiceConfiguration;
 
 /**
  * Configuration for all reporting system.
@@ -32,5 +33,13 @@ public class ReportingConfiguration {
         else this.consoleReportingService = new ConsoleReportingService();
 
         return this.consoleReportingService;
+    }
+
+    /**
+     * Construct new ReportingService default configuration.
+     * @return - configuration.
+     */
+    public ReportingServiceConfiguration defaultConfiguration() {
+        return ReportingServiceConfiguration.builder().build();
     }
 }

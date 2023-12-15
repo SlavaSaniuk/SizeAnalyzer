@@ -26,8 +26,7 @@ public class ReportingServiceTestCase {
     @Test
     void consoleReportingService_showReport_shouldPrintReportToConsole() {
         this.testService = ReportingConfiguration.getInstance().getConsoleReportingService();
-        this.testService.setReport(testReport);
-        this.testService.formReport();
+        this.testService.formReport(testReport);
         this.testService.showReport();
     }
 

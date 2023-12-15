@@ -1,27 +1,28 @@
 package me.saniukvyacheslav.core.reporting.service;
 
 import me.saniukvyacheslav.core.reporting.report.Report;
+import me.saniukvyacheslav.core.reporting.service.configuration.ConfigurableReportingService;
 
 /**
  * Common service to form, show reports of analyzing.
  */
-public interface ReportingService {
+public interface ReportingService extends ConfigurableReportingService {
 
-    /**
-     * Set report to this service.
-     * @param aReport - report to set.
-     */
-    void setReport(Report aReport);
 
     /**
      * Form report (make hierarchy, insert title, etc.).
-     * @param formingArgs - forming arguments.
+     * @param aReport - source report.
      */
-    void formReport(Object... formingArgs);
+    void formReport(Report aReport);
 
     /**
      * Show report.
      */
     void showReport();
+
+    /**
+     * Clear report format and text (Not from inner Report object).
+     */
+    void clear();
 
 }
