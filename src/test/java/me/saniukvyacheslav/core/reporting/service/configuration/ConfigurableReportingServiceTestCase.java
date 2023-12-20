@@ -31,28 +31,28 @@ public class ConfigurableReportingServiceTestCase {
     @Test
     void configure_defaultConfiguration_shouldPrintSizeInBytes() {
         this.testService.formReport(TestingUtilities.getInstance().getTestReport());
-        this.testService.showReport();
+        this.testService.out();
     }
 
     @Test
     void configure_Kb_shouldPrintSizeInKb() {
         this.testService.configure(ReportingServiceConfiguration.builder().measureUnits(MeasureUnit.KILOBYTE).build());
         this.testService.formReport(TestingUtilities.getInstance().getTestReport());
-        this.testService.showReport();
+        this.testService.out();
     }
 
     @Test
     void configure_mb_shouldPrintSizeInMegaBytes() {
         this.testService.configure(ReportingServiceConfiguration.builder().measureUnits(MeasureUnit.MEGABYTE).build());
         this.testService.formReport(TestingUtilities.getInstance().getTestReport());
-        this.testService.showReport();
+        this.testService.out();
     }
 
     @Test
     void configure_gb_shouldPrintSizeInGb() {
         this.testService.configure(ReportingServiceConfiguration.builder().measureUnits(MeasureUnit.GIGABYTE).build());
         this.testService.formReport(TestingUtilities.getInstance().getTestReport());
-        this.testService.showReport();
+        this.testService.out();
     }
 
 }

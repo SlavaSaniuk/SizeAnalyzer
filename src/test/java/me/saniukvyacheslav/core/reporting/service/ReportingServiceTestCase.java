@@ -6,6 +6,7 @@ import me.saniukvyacheslav.core.reporting.report.Report;
 import me.saniukvyacheslav.core.space.SpaceAnalysisConfiguration;
 import me.saniukvyacheslav.core.space.SpaceAnalysisService;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -23,11 +24,16 @@ public class ReportingServiceTestCase {
         spaceAnalysisService.analyse(new File("E:\\001_WORK\\"), true);
     }
 
+    @BeforeEach
+    void beforeEach() {
+        this.testService = ReportingConfiguration.getInstance().getConsoleReportingService();
+        this.testService.clear();
+    }
+
     @Test
     void consoleReportingService_showReport_shouldPrintReportToConsole() {
-        this.testService = ReportingConfiguration.getInstance().getConsoleReportingService();
         this.testService.formReport(testReport);
-        this.testService.showReport();
+        this.testService.show();
     }
 
 }

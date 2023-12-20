@@ -44,9 +44,6 @@ public abstract class BaseReportingService implements ReportingService {
     }
 
     @Override
-    public abstract void showReport();
-
-    @Override
     public void clear() {
         this.reportsStrings.setLength(0);
     }
