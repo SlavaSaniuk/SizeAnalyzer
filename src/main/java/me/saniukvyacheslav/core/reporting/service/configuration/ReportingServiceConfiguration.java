@@ -13,6 +13,7 @@ import java.util.Objects;
 public class ReportingServiceConfiguration {
 
     @Getter private MeasureUnit usedMeasureUnitType;
+    @Getter private int digitNumInDecPart;
     @Getter private ReportingServiceConfigurationBuilder usedBuilder;
 
     /**
@@ -29,6 +30,7 @@ public class ReportingServiceConfiguration {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class ReportingServiceConfigurationBuilder {
         private MeasureUnit measureUnit = MeasureUnit.BYTE;
+        private int digitNumDecPart=2;
 
         /**
          * Set measure units type.
@@ -41,6 +43,13 @@ public class ReportingServiceConfiguration {
             return this;
         }
 
+        public ReportingServiceConfigurationBuilder digitNumberInDecimalPart(int aNum) {
+            if (aNum<0)
+                throw new IllegalArgumentException("Digits count in decimal part must be equal or greater zero.");
+            this.digitNumDecPart = aNum;
+            return this;
+        }
+
         /**
          * Build new configuration instance.
          * @return - new instance.
@@ -48,6 +57,7 @@ public class ReportingServiceConfiguration {
         public ReportingServiceConfiguration build() {
            ReportingServiceConfiguration configuration = new ReportingServiceConfiguration();
            configuration.usedMeasureUnitType = this.measureUnit;
+           configuration.digitNumInDecPart = this.digitNumDecPart;
            configuration.usedBuilder = this;
            return configuration;
         }
