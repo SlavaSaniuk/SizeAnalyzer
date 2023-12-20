@@ -1,15 +1,17 @@
 package me.saniukvyacheslav.core.reporting.service.out;
 
-
+/**
+ * ReportingOut functionality allows out/show generated report to different destinations (File, console).
+ */
 public interface ReportingOut {
 
     /**
-     * Output generated report file to somewhere.
+     * Output a generated report to somewhere.
      */
     void out();
 
     /**
-     * Show generated report to user.
+     * Show a generated report to user.
      */
     void show();
 
