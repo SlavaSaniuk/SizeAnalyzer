@@ -14,7 +14,7 @@ public class ConsoleReportingService extends BaseReportingService {
      */
     @Override
     public void out() {
-        System.out.println(super.reportsStrings.toString());
+        System.out.println(super.reportStrings.toString());
     }
 
     /**
@@ -22,7 +22,7 @@ public class ConsoleReportingService extends BaseReportingService {
      */
     @Override
     public void show() {
-        System.out.println(super.reportsStrings.toString());
+        System.out.println(super.reportStrings.toString());
     }
 }
 

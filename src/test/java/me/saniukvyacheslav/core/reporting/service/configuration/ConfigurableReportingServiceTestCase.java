@@ -55,4 +55,14 @@ public class ConfigurableReportingServiceTestCase {
         this.testService.out();
     }
 
+    @Test
+    void configure_separatorStrIsSemicolon_shouldPrintFileSizeRecordsWithSemicolon() {
+        this.testService.configure(ReportingServiceConfiguration.builder()
+                .measureUnits(MeasureUnit.MEGABYTE)
+                .pathSizeSeparatorString(";")
+                .build());
+        this.testService.formReport(TestingUtilities.getInstance().getTestReport());
+        this.testService.out();
+    }
+
 }

@@ -39,7 +39,7 @@ public class FileReportingService extends BaseReportingService {
         }
 
         try(PrintWriter writer = new PrintWriter(new FileWriter(this.outputFile))) {
-            writer.print(super.reportsStrings.toString());
+            writer.print(super.reportStrings.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

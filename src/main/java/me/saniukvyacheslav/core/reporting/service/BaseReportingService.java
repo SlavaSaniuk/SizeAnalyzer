@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public abstract class BaseReportingService implements ReportingService {
 
-    protected final StringBuilder reportsStrings = new StringBuilder(); // String from report;
+    protected final StringBuilder reportStrings = new StringBuilder(); // Strings from the report;
     private final DecimalFormat decimalFormat; // For format double values;
     private ReportingServiceConfiguration currentConfiguration; // This service configuration.
 
@@ -29,11 +29,11 @@ public abstract class BaseReportingService implements ReportingService {
         aReport.getRecords().forEach(record -> {
             switch (record.getRecordType().getType()) {
                 case 0: {
-                    this.reportsStrings.append(record.getRecordText()).append("\n");
+                    this.reportStrings.append(record.getRecordText()).append("\n");
                     break;
                 }
                 case 1: {
-                    this.reportsStrings.append(record.getFile()).append(":").append("\n");
+                    this.reportStrings.append(record.getFile()).append(":").append("\n");
                     break;
                 }
                 case 2: { // FileSize record:
@@ -45,7 +45,7 @@ public abstract class BaseReportingService implements ReportingService {
 
     @Override
     public void clear() {
-        this.reportsStrings.setLength(0);
+        this.reportStrings.setLength(0);
     }
 
     @Override
@@ -83,8 +83,11 @@ public abstract class BaseReportingService implements ReportingService {
 
         double fileSize = (double) srcFileSize/this.currentConfiguration.getUsedMeasureUnitType().getSizeInBytes();
 
-        this.reportsStrings.append(fileSizeRecord.getFile()).append(" - ")
-                .append(this.formatDouble(fileSize)).append(" ").append(this.currentConfiguration.getUsedMeasureUnitType().getShortName())
+        this.reportStrings.append(fileSizeRecord.getFile())
+                .append(this.currentConfiguration.getPathSizeSeparator())
+                .append(this.formatDouble(fileSize))
+                .append(" ")
+                .append(this.currentConfiguration.getUsedMeasureUnitType().getShortName())
                 .append("\n");
     }
 
