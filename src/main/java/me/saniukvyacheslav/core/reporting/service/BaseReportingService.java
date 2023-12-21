@@ -13,6 +13,7 @@ public abstract class BaseReportingService implements ReportingService {
 
     protected final StringBuilder reportStrings = new StringBuilder(); // Strings from the report;
     private final DecimalFormat decimalFormat; // For format double values;
+
     private ReportingServiceConfiguration currentConfiguration; // This service configuration.
 
     public BaseReportingService() {
@@ -28,12 +29,12 @@ public abstract class BaseReportingService implements ReportingService {
 
         aReport.getRecords().forEach(record -> {
             switch (record.getRecordType().getType()) {
-                case 0: {
-                    this.reportStrings.append(record.getRecordText()).append("\n");
+                case 0: { // Text record:
+                    if (this.isIncludeTR()) this.reportStrings.append(record.getRecordText()).append("\n");
                     break;
                 }
-                case 1: {
-                    this.reportStrings.append(record.getFile()).append(":").append("\n");
+                case 1: { // Hierarchy record:
+                    if (this.isIncludeHR()) this.reportStrings.append(record.getFile()).append(":").append("\n");
                     break;
                 }
                 case 2: { // FileSize record:
@@ -62,6 +63,10 @@ public abstract class BaseReportingService implements ReportingService {
         this.currentConfiguration = ReportingConfiguration.getInstance().defaultConfiguration();
     }
 
+    /**
+     * Change used decimal format when someone try to configure this service.
+     * @param aDigitsNumInDecPart - count of digits in decimal part in file size.
+     */
     private void changeDecimalFormat(int aDigitsNumInDecPart) {
         if (aDigitsNumInDecPart<0)
             throw new IllegalArgumentException("Digits number in decimal part must be equal or greater zero.");
@@ -74,6 +79,15 @@ public abstract class BaseReportingService implements ReportingService {
 
         this.decimalFormat.applyPattern(decimalFormat.toString());
     }
+
+    protected boolean isIncludeHR() {
+        return this.currentConfiguration.isIncludeHierarchyRecords();
+    }
+
+    protected boolean isIncludeTR() {
+        return this.currentConfiguration.isIncludeTextRecords();
+    }
+
 
     private void appendFileSizeRecord(ReportRecord fileSizeRecord) {
         if (fileSizeRecord == null) return;

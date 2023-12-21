@@ -16,6 +16,8 @@ public class ReportingServiceConfiguration {
     @Getter private MeasureUnit usedMeasureUnitType;
     @Getter private int digitNumInDecPart;
     @Getter private String pathSizeSeparator;
+    @Getter private boolean isIncludeHierarchyRecords;
+    @Getter private boolean isIncludeTextRecords;
     @Getter private ReportingServiceConfigurationBuilder usedBuilder;
 
     /**
@@ -34,6 +36,8 @@ public class ReportingServiceConfiguration {
         private MeasureUnit measureUnit = MeasureUnit.BYTE;
         private int digitNumDecPart=2;
         private String pathSizeSeparatorString = " - ";
+        private boolean builderIsIncludeHR = true;
+        private boolean builderIsIncludeTR = true;
 
         /**
          * Set measure units type.
@@ -62,12 +66,35 @@ public class ReportingServiceConfiguration {
 
         /**
          * Set separator string between file path and file size.
+         * By default, " - ".
          * @param aSeparator - separator characters.
          * @return - this builder.
          */
         public ReportingServiceConfigurationBuilder pathSizeSeparatorString(String aSeparator) {
             Objects.requireNonNull(aSeparator, "Separator string must be not null.");
             this.pathSizeSeparatorString = aSeparator;
+            return this;
+        }
+
+        /**
+         * Is an includes hierarchy records in a report.
+         * By default, true.
+         * @param isInclude - true/false.
+         * @return - this builder.
+         */
+        public ReportingServiceConfigurationBuilder includeHierarchyRecords(boolean isInclude) {
+            this.builderIsIncludeHR = isInclude;
+            return this;
+        }
+
+        /**
+         * Is an includes text records in a report.
+         * By default, true.
+         * @param isInclude - true/false.
+         * @return - this builder.
+         */
+        public ReportingServiceConfigurationBuilder includeTextRecords(boolean isInclude) {
+            this.builderIsIncludeTR = isInclude;
             return this;
         }
 
@@ -80,6 +107,8 @@ public class ReportingServiceConfiguration {
            configuration.usedMeasureUnitType = this.measureUnit;
            configuration.digitNumInDecPart = this.digitNumDecPart;
            configuration.pathSizeSeparator = this.pathSizeSeparatorString;
+           configuration.isIncludeHierarchyRecords = this.builderIsIncludeHR;
+           configuration.isIncludeTextRecords = this.builderIsIncludeTR;
            configuration.usedBuilder = this;
            return configuration;
         }
