@@ -3,17 +3,24 @@ package me.saniukvyacheslav.core.reporting;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import me.saniukvyacheslav.core.reporting.service.ConsoleReportingService;
+import me.saniukvyacheslav.core.reporting.service.FileReportingService;
 import me.saniukvyacheslav.core.reporting.service.ReportingService;
 import me.saniukvyacheslav.core.reporting.service.configuration.ReportingServiceConfiguration;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
- * Configuration for all reporting system.
+ * Configuration for the reporting system.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ReportingConfiguration {
 
     private static ReportingConfiguration INSTANCE; // Singleton instance;
     private ReportingService consoleReportingService;
+    private ReportingService fileReportingService; // FileReportingService instance.
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
 
     /**
      * Get current application wide reporting configuration.
@@ -33,6 +40,21 @@ public class ReportingConfiguration {
         else this.consoleReportingService = new ConsoleReportingService();
 
         return this.consoleReportingService;
+    }
+
+    /**
+     * Get current file reporting service implementation.
+     * Output file name will be "report-[CURRENT_DATE_TIME].txt";
+     * @return - file reporting service.
+     */
+    public ReportingService getFileReportingService() {
+        if (this.fileReportingService != null) return this.fileReportingService;
+
+        FileReportingService fileReportingService = new FileReportingService();
+        String outputName = String.format("report-%s.txt", LocalDateTime.now().format(this.dateTimeFormatter));
+        fileReportingService.setOutputFile(new File(outputName));
+        this.fileReportingService = fileReportingService;
+        return fileReportingService;
     }
 
     /**
