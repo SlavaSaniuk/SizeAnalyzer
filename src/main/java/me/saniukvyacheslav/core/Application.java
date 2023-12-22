@@ -9,7 +9,6 @@ import me.saniukvyacheslav.core.exceptions.NoSuchImportantArgumentException;
 import me.saniukvyacheslav.core.reporting.ReportingConfiguration;
 import me.saniukvyacheslav.core.reporting.dao.ReportDao;
 import me.saniukvyacheslav.core.reporting.report.Report;
-import me.saniukvyacheslav.core.reporting.service.ConsoleReportingService;
 import me.saniukvyacheslav.core.space.SpaceAnalysisConfiguration;
 
 import java.io.File;
